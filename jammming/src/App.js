@@ -18,14 +18,21 @@ class App extends Component {
   }
 
   addTrack(track){
+    //current playlist
     let tracks = this.state.playlistTracks;
+    //add track to playlist
     tracks.push(track);
-
+    //update current playlist
     this.setState({playlistTracks: tracks});
   }
 
   removeTrack(track){
-    // removing tracks from playlist
+    //current playlist
+    let tracks = this.state.playlistTracks;
+    //create new array (playlist) that doesn't include selected track
+    tracks = tracks.filter(selectedTrack => selectedTrack.id !== track.id);
+    //update current playlist
+    this.setState({playlistTracks: tracks});
   }
 
   updatePlaylistName(name){
