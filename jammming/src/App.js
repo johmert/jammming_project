@@ -66,11 +66,19 @@ class App extends Component {
 
   render() {
     return (
-      <h1>Ja<span className="hightlight">mmm</span>ing</h1>
-      <div className="App">
-      // SearchBar component
-      // SearchResults component
-      // PlayList component
+      <div>
+        <h1>Ja<span className="hightlight">mmm</span>ing</h1>
+        <div className="App">
+          <SearchBar onSearch={this.search} />
+          <div className="App-playlist">
+            <SearchResults searchResults={this.state.searchResults}
+                           onAdd{this.addTrack} />
+            <Playlist playlistTracks={this.state.playlistTracks}
+                      onNameChange={this.updatePlaylistName}
+                      onRemove={this.removeTrack}
+                      onSave={this.savePlaylist} />
+          </div>
+        </div>
       </div>
     );
   }
