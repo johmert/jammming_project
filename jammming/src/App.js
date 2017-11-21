@@ -37,10 +37,20 @@ class App extends Component {
 
   updatePlaylistName(name){
     //changing the name of the playlist
+    this.setState({playlistName: name});
   }
 
   savePlaylist(){
-    // saving playlist to user's spotify account
+    // saving playlist to user's Spotify account
+    // iterate through each track and return its uri
+    const trackURI = this.state.playlistTracks.map(track => track.uri);
+    //send track uri to empty array in Spotify (as well as Playlist's name)
+    Spotify.savePlaylist(this.state.playlistName, trackURI).then(() => {
+      this.setState({
+        playlistname: 'New Playlist',
+        playlistTracks: []
+      });
+    });
   }
 
   render() {
