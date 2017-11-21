@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Playlist from '../Playlist/Playlist';
-import SearchBar from '../SearchBar/SearchBar';
-import SearchResults from '../SearchResults/SearchResults';
-import Spotify from '../../util/Spotify';
+import Playlist from './components/Playlist/Playlist';
+import SearchBar from './components/SearchBar/SearchBar';
+import SearchResults from './components/SearchResults/SearchResults';
+import Spotify from './util/Spotify';
 
 class App extends Component {
   constructor(props){
@@ -72,7 +72,7 @@ class App extends Component {
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults}
-                           onAdd{this.addTrack} />
+                           onAdd={this.addTrack} />
             <Playlist playlistTracks={this.state.playlistTracks}
                       onNameChange={this.updatePlaylistName}
                       onRemove={this.removeTrack}
