@@ -8,7 +8,6 @@ const Spotify = {
     if (accessToken) {
       return accessToken;
     }
-    //adding in accessToken info
     const token = window.location.href.match(/access_token=([^&]*)/);
     const expireTime = window.location.href.match(/expires_in=([^&]*)/);
 
@@ -47,9 +46,42 @@ const Spotify = {
       });
   },
 
-  savePlaylist() {
+  savePlaylist(name, trackURI) {
     // saving playlist to Spotify account
-  }
+    if (!name || !trackURI) {
+      return;
+    }
+
+    const accessToken = Spotify.getAccessToken();
+    let userID;
+
+    return fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+        }
+      }
+    ).then(response => response.json()
+    ).then(jsonResponse => {
+    userID= jsonResponse.id;
+    return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      method: 'POST',
+      body: JSON.stringify({name: name})
+    }).then(response => response.json()
+  ).then(jsonResponse => {
+    const playlistID = jsonResponse.id;
+    return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      method: 'POST',
+      body: JSON.stringify({uris: trackURI})
+    });
+  });
+});
+}
 };
 
 export default Spotify;
