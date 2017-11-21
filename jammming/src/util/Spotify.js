@@ -70,18 +70,18 @@ const Spotify = {
       method: 'POST',
       body: JSON.stringify({name: name})
     }).then(response => response.json()
-  ).then(jsonResponse => {
-    const playlistID = jsonResponse.id;
-    return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      },
-      method: 'POST',
-      body: JSON.stringify({uris: trackURI})
+    ).then(jsonResponse => {
+        const playlistID = jsonResponse.id;
+        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+          method: 'POST',
+          body: JSON.stringify({uris: trackURI})
+        });
+      });
     });
-  });
-});
-}
+  }
 };
 
 export default Spotify;
