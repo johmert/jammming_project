@@ -18,7 +18,10 @@ class App extends Component {
   }
 
   addTrack(track){
-    // adding tracks from results to playlist
+    let tracks = this.state.playlistTracks;
+    tracks.push(track);
+
+    this.setState({playlistTracks: tracks});
   }
 
   removeTrack(track){
