@@ -20,6 +20,7 @@ class App extends Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
+
   }
 
   search(term) {
